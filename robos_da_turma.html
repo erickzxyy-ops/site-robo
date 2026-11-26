@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#020b18">
+  <title>Robôs da Turma | Arduino</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #00aaff;
+      --cyan: #00d9ff;
+      --dark: #020b18;
+      --white: #f4f8ff;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--white);
+      background:
+        radial-gradient(ellipse at 78% 48%, rgba(0, 111, 255, .18), transparent 38%),
+        radial-gradient(ellipse at 15% 75%, rgba(0, 170, 255, .10), transparent 35%),
+        var(--dark);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .16;
+      background-image:
+        linear-gradient(90deg, transparent 97%, #087fc7 98%),
+        linear-gradient(transparent 97%, #087fc7 98%);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+
+    header {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+      min-height: 94px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      border-bottom: 1px solid rgba(0, 174, 255, .65);
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      color: var(--cyan);
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1;
+      text-shadow: 0 0 18px rgba(0, 217, 255, .5);
+    }
+
+    .brand {
+      border-left: 1px solid rgba(0, 174, 255, .7);
+      padding-left: 20px;
+    }
+
+    .brand h1 {
+      font-size: clamp(19px, 3vw, 31px);
+      letter-spacing: 1px;
+      font-style: italic;
+    }
+
+    .brand p {
+      margin-top: 5px;
+      color: #9eb9d2;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    main {
+      width: min(1200px, 92%);
+      min-height: calc(100vh - 95px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      align-items: center;
+      gap: 34px;
+      padding: 55px 0 70px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      color: #b6cce0;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow span { color: var(--cyan); }
+
+    .intro h2 {
+      font-size: clamp(48px, 7vw, 88px);
+      line-height: .96;
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: -3px;
+      text-transform: uppercase;
+    }
+
+    .intro h2 span {
+      display: block;
+      color: var(--blue);
+      text-shadow: 0 0 28px rgba(0, 153, 255, .28);
+    }
+
+    .slogan {
+      margin-top: 24px;
+      color: #dcecff;
+      font-size: clamp(20px, 2.5vw, 29px);
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .description {
+      max-width: 540px;
+      margin-top: 22px;
+      color: #c4d3e3;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .description strong { color: var(--cyan); }
+
+    .action {
+      display: inline-flex;
+      align-items: center;
+      gap: 22px;
+      margin-top: 34px;
+      padding: 16px 24px;
+      border: 1px solid var(--cyan);
+      border-radius: 8px;
+      color: white;
+      background: linear-gradient(110deg, rgba(0, 136, 255, .28), rgba(0, 35, 75, .4));
+      box-shadow: 0 0 20px rgba(0, 153, 255, .22), inset 0 0 15px rgba(0, 153, 255, .10);
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: .2s ease;
+      cursor: pointer;
+    }
+
+    .action:hover {
+      transform: translateY(-3px);
+      background: rgba(0, 153, 255, .35);
+      box-shadow: 0 0 28px rgba(0, 190, 255, .42);
+    }
+
+    .action span { color: var(--cyan); font-size: 23px; }
+
+    .robot-area {
+      min-height: 430px;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .robot-area::before {
+      content: "";
+      position: absolute;
+      top: 8%;
+      right: 4%;
+      color: rgba(0, 153, 255, .16);
+      font-size: clamp(48px, 8vw, 100px);
+      font-weight: 900;
+      letter-spacing: 5px;
+    }
+
+    .robot-card {
+      width: 100%;
+      max-width: 560px;
+      min-height: 340px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      border: 1px solid rgba(0, 174, 255, .35);
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(0, 53, 105, .25), rgba(1, 10, 24, .6));
+      box-shadow: 0 0 50px rgba(0, 119, 255, .12), inset 0 0 35px rgba(0, 119, 255, .08);
+      overflow: hidden;
+    }
+
+    .robot-card::before, .robot-card::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 2px;
+      background: var(--cyan);
+      box-shadow: 0 0 12px var(--cyan);
+    }
+
+    .robot-card::before { top: 0; left: 0; }
+    .robot-card::after { bottom: 0; right: 0; }
+
+    .robot-emoji {
+      font-size: clamp(150px, 23vw, 245px);
+      filter: drop-shadow(0 0 22px rgba(0, 153, 255, .45));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .robot-caption {
+      position: absolute;
+      bottom: 22px;
+      color: #9bc7e9;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .scroll-mark {
+      position: absolute;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--blue);
+      font-size: 32px;
+      opacity: .8;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @media (max-width: 800px) {
+      header { min-height: 78px; }
+      .logo { font-size: 34px; }
+      main {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 55px 0 60px;
+      }
+      .intro { text-align: center; }
+      .description { margin-left: auto; margin-right: auto; }
+      .robot-area { min-height: 310px; }
+      .robot-card { min-height: 280px; }
+      .scroll-mark { display: none; }
+    }
+
+    @media (max-width: 420px) {
+      header { gap: 12px; }
+      .brand { padding-left: 12px; }
+      .brand p { letter-spacing: 1px; font-size: 10px; }
+      .intro h2 { letter-spacing: -2px; }
+      .description { font-size: 15px; }
+      .action { padding: 14px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo" aria-label="Arduino">∞+</div>
+    <div class="brand">
+      <h1>Robôs que constroem o futuro!</h1>
+      <p>INOVAÇÃO • APRENDIZADO • TECNOLOGIA</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p class="eyebrow"><span>●</span> Projetos da nossa turma</p>
+      <h2>1º ANO DES.<span>DE SISTEMA</span></h2>
+      <p class="slogan">Nossa criatividade em movimento.</p>
+      <p class="description">
+        Conheça o mundo da robótica e os projetos desenvolvidos pelos alunos
+        da nossa sala, utilizando <strong>Arduino</strong> e muita criatividade!
+      </p>
+      <button class="action" id="projectButton" type="button">
+        Conheça nossos projeto <span>→</span>
+      </button>
+    </section>
+
+    <section class="robot-area" aria-label="Ilustração de robô Arduino">
+      <div class="robot-card">
+        <div class="robot-emoji" aria-hidden="true">🤖</div>
+        <p class="robot-caption">Tecnologia • Criatividade • Robótica</p>
+      </div>
+    </section>
+    <div class="scroll-mark" aria-hidden="true">⌄</div>
+  </main>
+
+  
+<script>
+    const projectButton = document.getElementById("projectButton");
+
+    projectButton.addEventListener("click", () => {
+        window.location.href = "robos.html";
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<html lang="<!DOCTYPE html>
+pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robôs do Desenvolvimento de Sistema</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #071525;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background: #0b2038;
+    padding: 25px 8%;
+    border-bottom: 2px solid #00aaff;
+}
+
+header h1 {
+    color: #00aaff;
+    font-size: 25px;
+}
+
+header p {
+    color: #b8d8ed;
+    margin-top: 8px;
+}
+
+.container {
+    width: 85%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.voltar {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 20px;
+    background: #008ed6;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.voltar:hover {
+    background: #00b7ff;
+}
+
+.titulo {
+    text-align: center;
+    margin: 55px 0 35px;
+}
+
+.titulo h2 {
+    color: #00aaff;
+    font-size: 30px;
+}
+
+.titulo p {
+    color: #b8d8ed;
+    margin-top: 12px;
+}
+
+.robo {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background: #102b46;
+    border: 1px solid #087fbd;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.robo img {
+    width: 280px;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #00aaff;
+}
+
+.robo-info h2 {
+    color: #00aaff;
+    margin-bottom: 15px;
+}
+
+.robo-info p {
+    color: #d1e5f3;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.robo-info strong {
+    color: #00c3ff;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 40px;
+    background: #0b2038;
+    color: #9bc8e5;
+}
+
+@media (max-width: 700px) {
+    .container {
+        width: 92%;
+    }
+
+    .robo {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .robo img {
+        width: 100%;
+        height: 230px;
+    }
+
+    .titulo h2 {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>∞ ROBÔS DA TURMA 1º ANO DESENVOLVIMENTO DE SISTEMA</h1>
+    <p>Conheça os projetos com arduino desenvolvidos pelos nossos alunos</p>
+</header>
+
+<div class="container">
+
+    <!-- BOTÃO PARA VOLTAR À PÁGINA INICIAL -->
+    <a href="robos_da_turma.html" class="voltar">
+        ← Voltar para a página inicial
+    </a>
+
+    <section class="titulo">
+        <h2>NOSSOS ROBÔS</h2>
+        <p>Conheça os quatro projetos desenvolvidos pela nossa turma.</p>
+    </section>
+
+    <!-- ROBÔ 1 -->
+    <section class="robo">
+        <img src="robo1.jpg.jpg" alt="Foto do Robô seguidor de linha">
+
+        <div class="robo-info">
+            <h2>01. Robô seguidor de linha</h2>
+            <p>
+                Robô segui automaticamente uma linha preta no chao, utilizando
+                sensores para indetificar o caminho.
+            </p>
+            <p><strong>Componentes:</strong> Arduino UNO, sensor de linha,
+            motores e ponte H.</p>
+            <p><strong>Criador:</strong> Hernandes </p>
+        </div>
+    </section>
+
+    <!-- ROBÔ 2 -->
+    <section class="robo">
+        <img src="robo2.jpg" alt="Foto do robo de emanuel">
+
+        <div class="robo-info">
+            <h2>02. Robô Desviador de obstaculos</h2>
+            <p>
+                Esse robô tem como objetivo detectar objetos à sua frente 
+                e deviar automaticamente
+            </p>
+            <p><strong>Componentes:</strong> Arduino UNO, sensor ultrassonico,
+            motores, servo motor e ponte H.</p>
+            <p><strong>Criador:</strong> Emanuel </p>
+        </div>
+    </section>
+
+    <!-- ROBÔ 3 -->
+    <section class="robo">
+        <img src="robo3.jpg.jpg" alt="Foto do robo de fernando">
+
+        <div class="robo-info">
+            <h2>03. Garra Robótica com Servomotores</h2>
+            <p>
+                Projeto de uma garra robótica capaz de realizar
+                movimentos para pegar e movimentar pequenos objetos.
+            </p>
+            <p><strong>Componentes:</strong> Arduino, servomotores,
+            estrutura e fios.</p>
+            <p><strong>Criador:</strong> Fernando </p>
+        </div>
+    </section>
+
+    <!-- ROBÔ 4 -->
+    <section class="robo">
+        <img src="robo4.jpg" alt="Foto do Robô de lucas">
+
+        <div class="robo-info">
+            <h2>04. Robô Carro de bombeiro</h2>
+            <p>
+                Ele tem como objetivo identificar a presença de fogo
+                e aciona uma pequena bomba de água para apagar.
+            </p>
+            <p><strong>Componentes:</strong> Arduino UNO, motores,
+            sensor de temperatura, mini bomba de agua, reservatorio, mangueira e estrutura.</p>
+            <p><strong>Criador:</strong> Lucas </p>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>1º ANO DESENVOLVIMENTO DE SISTEMA</p>
+    <p>Aprender também é construir o futuro!</p>
+</footer>
+
+</body>
+</html>
